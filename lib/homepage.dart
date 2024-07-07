@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gradtry4/filePicker.dart';
+import 'package:gradtry4/newScreen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -11,7 +11,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +37,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         CircleAvatar(
                           radius: 52,
-                          backgroundImage: AssetImage('assets/images/profile.jpeg'),
+                          backgroundImage:
+                              AssetImage('assets/images/profile.jpeg'),
                         ),
                         SizedBox(
                           height: 12,
@@ -88,16 +88,68 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(
+              height: 40,
+            ),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FilePickerScreen()),
+                  MaterialPageRoute(builder: (context) => newPageScreen()),
                 );
               },
-              child: Text('File Picker Screen'),
+              child: Text('Grad Calculate Screen'),
             ),
-            
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 15.0),
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.blue[100],
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(color: Colors.blue),
+                    ),
+                    child: Text(
+                      '1. Please ensure that there should be no blank row or columns.',
+                      style: TextStyle(
+                          fontSize: 16.0, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 8.0),
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.green[100],
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(color: Colors.green),
+                    ),
+                    child: Text(
+                      '2. First row should be header e.g Rollno, Name, Marks',
+                      style: TextStyle(
+                          fontSize: 16.0, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 8.0),
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.red[100],
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(color: Colors.red),
+                    ),
+                    child: Text(
+                      '3. Please ensure that \'Marks\' column should be present',
+                      style: TextStyle(
+                          fontSize: 16.0, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),

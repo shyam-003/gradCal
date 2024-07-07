@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gradtry4/auth/login.dart';
+import 'package:gradtry4/auth/signIn.dart';
 import 'package:gradtry4/homepage.dart';
-import 'package:gradtry4/login.dart';
-import 'package:gradtry4/signIn.dart';
 
 void main() {
   runApp(const MyApp());
