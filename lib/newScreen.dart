@@ -169,6 +169,7 @@ class _newPageScreenState extends State<newPageScreen> {
     }
   }
 
+  //Give grade for Students in separate list
   void addGrade(List<Map<String, dynamic>> updatedRanges) {
     studentGrades.clear();
     for (var mark in studentsMarks) {
@@ -182,6 +183,7 @@ class _newPageScreenState extends State<newPageScreen> {
     print(studentGrades);
   }
 
+  // Add grade to excel Data
   void updateData() {
     addGrade(twentyPerGradeRange);
 
@@ -214,7 +216,7 @@ class _newPageScreenState extends State<newPageScreen> {
     print('Modified data : ${modifiedExcelData}');
   }
 
-// get grade range
+// get grade range to two decimal
   double toTwoDecimal(double value) {
     return double.parse(value.toStringAsFixed(2));
   }
@@ -277,13 +279,12 @@ class _newPageScreenState extends State<newPageScreen> {
         toTwoDecimal((avg - 4 * intv).toDouble());
 
 // Directly assign values to 'F' grade
-    twentyPerGradeRange[9]['highRange'] =
-        toTwoDecimal(
-          // max(
-          // 23.00, 
-          (avg - 4 * intv).toDouble()
-          // )
-          );
+    twentyPerGradeRange[9]['highRange'] = toTwoDecimal(
+        // max(
+        // 23.00,
+        (avg - 4 * intv).toDouble()
+        // )
+        );
     twentyPerGradeRange[9]['lowRange'] = toTwoDecimal(0.00);
 
     print(twentyPerGradeRange);
@@ -370,22 +371,34 @@ class _newPageScreenState extends State<newPageScreen> {
                       actions: [
                         TextButton(
                           onPressed: () {
-                            // Update twentyPerGradeRange based on controller values
+                            bool allFieldsFilled = true;
                             for (int i = 0;
                                 i < twentyPerGradeRange.length;
                                 i++) {
-                              List<String> ranges =
-                                  lowerRangeControllers[i].text.split('-');
-                              twentyPerGradeRange[i]['lowRange'] =
-                                  double.parse(ranges[0].trim());
-                              twentyPerGradeRange[i]['highRange'] =
-                                  double.parse(ranges[1].trim());
+                              if (lowerRangeControllers[i].text.isEmpty) {
+                                allFieldsFilled = false;
+                                break;
+                              }
                             }
-                            // updateData();
-                            setState(() {
-                              // updateData();
-                            });
-                            Navigator.of(context).pop();
+                            if (allFieldsFilled) {
+                              for (int i = 0;
+                                  i < twentyPerGradeRange.length;
+                                  i++) {
+                                List<String> ranges =
+                                    lowerRangeControllers[i].text.split('-');
+                                twentyPerGradeRange[i]['lowRange'] =
+                                    double.parse(ranges[0].trim());
+                                twentyPerGradeRange[i]['highRange'] =
+                                    double.parse(ranges[1].trim());
+                              }
+                              setState(() {});
+                              Navigator.of(context).pop();
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                    content: Text('Please fill all fields')),
+                              );
+                            }
                           },
                           child: Text('OK'),
                         ),
@@ -421,22 +434,6 @@ class _newPageScreenState extends State<newPageScreen> {
                 ),
               ),
               SizedBox(height: 20.0),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     ElevatedButton(
-              //       onPressed: () {
-              //         print(excelData);
-              //       },
-              //       child: Text('Get Excel Data on Console '),
-              //     ),
-              //     SizedBox(height: 10.0),
-              //     ElevatedButton(
-              //       onPressed: updateData,
-              //       child: Text('Get Updated Data '),
-              //     ),
-              //   ],
-              // ),
               SizedBox(height: 20.0),
               _buildBarChart(_filePath, studentsMarks, twentyPerGradeRange),
               SizedBox(height: 60.0),

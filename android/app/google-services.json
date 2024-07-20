@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "171574447715",
+    "project_id": "dcproject-734d4",
+    "storage_bucket": "dcproject-734d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171574447715:android:b8e1d0a20f00a322f83256",
+        "android_client_info": {
+          "package_name": "com.example.gradtry4"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDapo0kkNRVkf5UzfrR6_GP8hbfGO2RIWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
